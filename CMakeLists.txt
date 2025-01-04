@@ -1,5 +1,3 @@
-project(BGFX)
-
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 if(APPLE)
@@ -10,10 +8,10 @@ endif()
 
 set(SRC src/amalgamated.cpp)
 
-# Dependencies
-
 include_directories(
         include
+
+        # Dependencies
         ../bx/include
         ../bimg/include
         3rdparty/khronos
