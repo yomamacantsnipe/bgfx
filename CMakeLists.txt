@@ -14,6 +14,7 @@ include_directories(
         # Dependencies
         ../bx/include
         ../bimg/include
+        3rdparty
         3rdparty/khronos
 )
 
@@ -26,3 +27,14 @@ if(APPLE)
 endif()
 
 add_library(bgfx STATIC ${SRC})
+set_target_properties(bgfx PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(bgfx PROPERTIES CXX_STANDARD 20)
+set_target_properties(bgfx PROPERTIES CXX_STANDARD_REQUIRED ON)
+set_target_properties(bgfx PROPERTIES CXX_EXTENSIONS OFF)
+
+if (APPLE)
+    target_compile_options(bgfx PRIVATE -x objective-c++)
+elseif (WIN32)
+    target_compile_options(bgfx PRIVATE /Zc:__cplusplus /Zc:preprocessor)
+    include_directories(../bx/include/compat/msvc)
+endif()
